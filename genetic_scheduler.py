@@ -2,12 +2,13 @@ from csvData.csv_strings import course_info_csv, student_courses_csv
 import time
 import pandas as pd
 import random
+import sys
 import re
 from collections import defaultdict
 from io import StringIO
 
 # --------------------------
-# 1) 教室名称映射 (保持不变)
+# 1) 教室名称映射
 # --------------------------
 classroom_mapping = {
     1: "Swann Lecture Theater",
@@ -28,9 +29,15 @@ def get_workshop_name(ws_id):
 
 
 # --------------------------
-# 2) 读取CSV并解析 (保持不变)
+# 2) 读取CSV并解析
+#   student_courses.csv + course_info.csv
 # --------------------------
 def parse_course_info(course_info_str):
+    """
+    从本地CSV文件读取数据:
+      - student_courses.csv
+      - course_info.csv
+    """
     df = pd.read_csv(StringIO(course_info_str))
     lecturer_set = df['Lecturer'].unique().tolist()
     lecturer_to_id = {lec: i for i, lec in enumerate(lecturer_set)}
@@ -72,7 +79,6 @@ def parse_course_info(course_info_str):
         }
     return course_dict, lecturer_to_id
 
-
 def parse_student_info(stu_info_str):
     df = pd.read_csv(StringIO(stu_info_str))
     import ast
@@ -89,7 +95,7 @@ def parse_student_info(stu_info_str):
 
 
 # --------------------------
-# 3) 常量设置 (保持不变)
+# 3) 常量设置
 # --------------------------
 SINGLE_WEEKS = [1, 3, 5, 7, 9, 11]
 DOUBLE_WEEKS = [2, 4, 6, 8, 10]
@@ -103,7 +109,7 @@ MAX_WS_CAPACITY = 30
 
 
 # --------------------------
-# 4) 构建课程->学生映射 (保持不变)
+# 4) 构建课程->学生映射
 # --------------------------
 def build_course_to_students(students_courses):
     c2s = defaultdict(set)
@@ -114,7 +120,7 @@ def build_course_to_students(students_courses):
 
 
 # --------------------------
-# 5) 并行Workshop拆分 (保持不变)
+# 5) 并行Workshop拆分
 # --------------------------
 def split_workshop_sessions(course_dict, course2stu, max_capacity=30):
     new_cd = dict(course_dict)
@@ -378,6 +384,7 @@ class GeneticScheduler:
         self.crossover_prob = crossover_prob
         self.mutation_prob = mutation_prob
         self.elite_num = elite_num
+        self.start_time = time.time() # 记录开始时间
 
     def initialize_population(self):
         return [random_initial_solution(self.courses, self.student_map)
@@ -385,9 +392,9 @@ class GeneticScheduler:
 
     def rank_population(self, population):
         return sorted(
-            [(sol, evaluate_solution(sol, self.courses, self.student_map)[0])
+            [(sol, evaluate_solution(sol, self.courses, self.student_map)) # 返回包含冲突信息的tuple
              for sol in population],
-            key=lambda x: x[1]
+            key=lambda x: x[1][0] # 根据总成本排序
         )
 
     def select_parents(self, ranked_pop):
@@ -458,13 +465,23 @@ class GeneticScheduler:
         population = self.initialize_population()
         best_solution = None
         best_fitness = float('inf')
+        best_hard_conflicts = float('inf') # 记录最佳硬冲突
+        best_soft_conflicts = float('inf') # 记录最佳软冲突
+
 
         for generation in range(self.generations):
             ranked = self.rank_population(population)
             current_best = ranked[0]
-            if current_best[1] < best_fitness:
-                best_fitness = current_best[1]
+            current_fitness = current_best[1][0]
+            current_hard_conflicts = current_best[1][1]
+            current_soft_conflicts = current_best[1][2]
+
+
+            if current_fitness < best_fitness:
+                best_fitness = current_fitness
                 best_solution = current_best[0]
+                best_hard_conflicts = current_hard_conflicts
+                best_soft_conflicts = current_soft_conflicts
 
             # 保留精英
             new_pop = [item[0] for item in ranked[:self.elite_num]]
@@ -486,9 +503,11 @@ class GeneticScheduler:
                 new_pop.append(child)
 
             population = new_pop
-            print(f"Generation {generation + 1}, Best Cost: {best_fitness}")
+            elapsed_time = time.time() - self.start_time
+            print(f"Generation {generation + 1}, Best Cost: {current_fitness}, Hard Conflicts: {current_hard_conflicts}, Soft Conflicts: {current_soft_conflicts}, Time: {elapsed_time:.2f}s")
 
-        return best_solution, best_fitness
+
+        return best_solution, best_fitness, best_hard_conflicts, best_soft_conflicts
 
 
 # --------------------------
@@ -545,32 +564,40 @@ def print_schedule(sol, course_dict):
 # 10) 主函数 (修改算法调用)
 # --------------------------
 def main():
-    # 解析数据
-    course_dict, _ = parse_course_info(course_info_csv)
-    students = parse_student_info(student_courses_csv)
-    course_student_map = build_course_to_students(students)
+    # Redirect stdout to a file
+    original_stdout = sys.stdout
+    with open('ga_timetable_output.txt', 'w', encoding='utf-8') as f: # Specify UTF-8 encoding
+        sys.stdout = f
 
-    # 拆分workshop
-    start_time = time.time()
-    modified_courses, modified_mapping = split_workshop_sessions(course_dict, course_student_map)
+        # 解析数据
+        course_dict, _ = parse_course_info(course_info_csv)
+        students = parse_student_info(student_courses_csv)
+        course_student_map = build_course_to_students(students)
 
-    # 运行遗传算法
-    scheduler = GeneticScheduler(
-        modified_courses, modified_mapping,
-        pop_size=100,
-        generations=10000,
-        crossover_prob=0.7,
-        mutation_prob=0.3,
-        elite_num=3
-    )
-    best_sol, best_cost = scheduler.evolve()
+        # 拆分workshop
+        start_time = time.time()
+        modified_courses, modified_mapping = split_workshop_sessions(course_dict, course_student_map)
 
-    # 输出结果
-    end_time = time.time()
-    print(f"\nTotal running time: {end_time - start_time:.2f} seconds")
-    print(f"Best solution cost: {best_cost}")
-    print_schedule(best_sol, modified_courses)
+        # 运行遗传算法
+        scheduler = GeneticScheduler(
+            modified_courses, modified_mapping,
+            pop_size=100,
+            generations=15000,  # 减少迭代次数以便更快地看到结果
+            crossover_prob=0.7,
+            mutation_prob=0.3,
+            elite_num=3
+        )
+        best_sol, best_cost, best_hard, best_soft = scheduler.evolve()
 
+        # 输出结果
+        end_time = time.time()
+        print(f"\nTotal running time: {end_time - start_time:.2f} seconds")
+        print(f"Best solution cost: {best_cost}, Hard Conflicts: {best_hard}, Soft Conflicts: {best_soft}")
+        print_schedule(best_sol, modified_courses)
+
+    # Restore stdout
+    sys.stdout = original_stdout
+    print("Output saved to timetable_output.txt")
 
 if __name__ == "__main__":
     main()

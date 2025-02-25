@@ -1,6 +1,6 @@
 from csvData.csv_strings import course_info_csv, student_courses_csv
-
 import time
+import sys
 import pandas as pd
 import random
 import re
@@ -494,7 +494,7 @@ def tabu_search(course_dict, course2stu,
 
     current_sol = random_initial_solution(course_dict, course2stu)
     best_sol = current_sol
-    best_cost, _, _ = evaluate_solution(best_sol, course_dict, course2stu)
+    best_cost, best_hard, best_soft = evaluate_solution(best_sol, course_dict, course2stu)
 
     tabu_list = deque()
     tabu_set = set()
@@ -512,35 +512,44 @@ def tabu_search(course_dict, course2stu,
     cur_sig = sol_signature(current_sol)
     tabu_list.append(cur_sig)
     tabu_set.add(cur_sig)
-    current_cost = best_cost
+    current_cost, current_hard, current_soft = best_cost, best_hard, best_soft
+
+    start_time = time.time()  # 记录开始时间
 
     for it in range(max_iter):
         neighbors = generate_neighbors(current_sol, course_dict, max_neighbors)
         found_better = False
         best_neighbor = None
         best_neighbor_cost = float('inf')
+        best_neighbor_hard = float('inf')  # 记录邻域最佳硬冲突
+        best_neighbor_soft = float('inf')  # 记录邻域最佳软冲突
 
         for nb_sol in neighbors:
             nb_sig = sol_signature(nb_sol)
-            cost_n, _, _ = evaluate_solution(nb_sol, course_dict, course2stu)
+            cost_n, hard_n, soft_n = evaluate_solution(nb_sol, course_dict, course2stu)
             if nb_sig in tabu_set:
                 # 破禁?
                 if cost_n < best_cost:
                     best_neighbor = nb_sol
                     best_neighbor_cost = cost_n
+                    best_neighbor_hard = hard_n
+                    best_neighbor_soft = soft_n
                     found_better = True
             else:
                 if cost_n < best_neighbor_cost:
                     best_neighbor = nb_sol
                     best_neighbor_cost = cost_n
+                    best_neighbor_hard = hard_n
+                    best_neighbor_soft = soft_n
                     found_better = True
 
         if found_better and best_neighbor is not None:
             current_sol = best_neighbor
-            current_cost = best_neighbor_cost
+            current_cost, current_hard, current_soft = best_neighbor_cost, best_neighbor_hard, best_neighbor_soft
             if current_cost < best_cost:
                 best_cost = current_cost
                 best_sol = current_sol
+                _, best_hard, best_soft = evaluate_solution(best_sol, course_dict, course2stu)
 
             nb_sig2 = sol_signature(best_neighbor)
             tabu_list.append(nb_sig2)
@@ -552,9 +561,10 @@ def tabu_search(course_dict, course2stu,
         else:
             pass
 
-        print(f"Iter={it}, currentCost={current_cost}, bestCost={best_cost}")
+        elapsed_time = time.time() - start_time
+        print(f"Iter={it}, currentCost={current_cost}, Hard Conflicts: {current_hard}, Soft Conflicts: {current_soft}, Best Cost: {best_cost}, Time: {elapsed_time:.2f}s")
 
-    return best_sol, best_cost
+    return best_sol, best_cost, best_hard, best_soft # 返回最佳硬冲突和软冲突
 
 
 # --------------------------
@@ -641,34 +651,42 @@ def print_schedule(sol, course_dict):
 
 
 def main():
-    # 1) parse
-    cdict, lectid = parse_course_info(course_info_csv)
-    stu_list = parse_student_info(student_courses_csv)
-    c2s = build_course_to_students(stu_list)
+    # Redirect stdout to a file
+    original_stdout = sys.stdout
+    with open('ts_timetable_output.txt', 'w', encoding='utf-8') as f: # Specify UTF-8 encoding
+        sys.stdout = f
 
-    # start_time
-    start_time = time.time()
+        # 1) parse
+        cdict, lectid = parse_course_info(course_info_csv)
+        stu_list = parse_student_info(student_courses_csv)
+        c2s = build_course_to_students(stu_list)
 
-    # 2) 并行Workshop拆分
-    new_cd, new_c2s = split_workshop_sessions(cdict, c2s, max_capacity=30)
+        # start_time
+        start_time = time.time()
 
-    # 3) tabu search
-    best_sol, best_cost = tabu_search(new_cd, new_c2s,
-                                      max_iter=15000,
-                                      max_neighbors=40,
-                                      tabu_tenure=10,
-                                      seed=42)
+        # 2) 并行Workshop拆分
+        new_cd, new_c2s = split_workshop_sessions(cdict, c2s, max_capacity=30)
 
-    end_time = time.time()
-    total_time = end_time - start_time
+        # 3) tabu search
+        best_sol, best_cost, best_hard, best_soft = tabu_search(new_cd, new_c2s, # 接收更多返回值
+                                          max_iter=15000,  # 减少迭代次数以便更快地看到结果
+                                          max_neighbors=40,
+                                          tabu_tenure=10,
+                                          seed=42)
 
-    print("\n=== Done Tabu Search ===")
-    print("\nRunning time: {:.2f} seconds".format(total_time))
-    print("Best cost =", best_cost)
+        end_time = time.time()
+        total_time = end_time - start_time
 
-    # 4) print
-    print_schedule(best_sol, new_cd)
+        print("\n=== Done Tabu Search ===")
+        print("\nRunning time: {:.2f} seconds".format(total_time))
+        print(f"Best cost: {best_cost}, Hard Conflicts: {best_hard}, Soft Conflicts:{best_soft}")
 
+        # 4) print
+        print_schedule(best_sol, new_cd)
+
+    # Restore stdout
+    sys.stdout = original_stdout
+    print("Output saved to timetable_output.txt")
 
 if __name__ == "__main__":
     main()

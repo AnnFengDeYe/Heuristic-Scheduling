@@ -9,6 +9,7 @@ import re
 import math
 from collections import defaultdict, deque
 from io import StringIO
+import sys
 
 # --------------------------
 # 1) 教室名称映射
@@ -473,14 +474,16 @@ def simulated_annealing(course_dict, course2stu,
     """
 
     random.seed(seed)
+    start_time = time.time()  # 记录开始时间
+
 
     # 1) 随机初始化解
     current_sol = random_initial_solution(course_dict, course2stu)
-    current_cost, _, _ = evaluate_solution(current_sol, course_dict, course2stu)
+    current_cost, current_hard, current_soft = evaluate_solution(current_sol, course_dict, course2stu)
 
     # 记录全局最佳解
     best_sol = current_sol
-    best_cost = current_cost
+    best_cost, best_hard, best_soft = current_cost, current_hard, current_soft # 初始化最佳硬冲突和软冲突
 
     # 初始化温度
     T = initial_temp
@@ -495,36 +498,35 @@ def simulated_annealing(course_dict, course2stu,
 
         # 3) 从邻域中随机选一个解
         next_sol = random.choice(neighbors)
-        next_cost, _, _ = evaluate_solution(next_sol, course_dict, course2stu)
+        next_cost, next_hard, next_soft = evaluate_solution(next_sol, course_dict, course2stu)
         cost_diff = next_cost - current_cost
 
         # 4) 判断是否接受新解 (Metropolis准则)
         if cost_diff < 0:
             # 若新解更好，直接接受
             current_sol = next_sol
-            current_cost = next_cost
+            current_cost, current_hard, current_soft = next_cost, next_hard, next_soft
         else:
             # 若更差，以概率 e^(-Δ/T) 接受
             accept_prob = math.exp(-cost_diff / T)
             if random.random() < accept_prob:
                 current_sol = next_sol
-                current_cost = next_cost
+                current_cost, current_hard, current_soft = next_cost, next_hard, next_soft
             # 否则不接受，保持原解不变
 
         # 5) 更新全局最优解
         if current_cost < best_cost:
             best_sol = current_sol
-            best_cost = current_cost
+            best_cost, best_hard, best_soft = current_cost, current_hard, current_soft
 
         # 6) 温度衰减
         T *= cooling_rate
 
-        # 可视化监控输出(每100轮)
-        if iteration % 100 == 0:
-            print(f"Iter = {iteration}, CurrentCost = {current_cost}, "
-                  f"BestCost = {best_cost}, Temp = {T:.4f}")
+        # 可视化监控输出
+        elapsed_time = time.time() - start_time
+        print(f"Iter={iteration}, currentCost={current_cost}, Hard Conflicts: {current_hard}, Soft Conflicts: {current_soft}, Best Cost: {best_cost}, Time: {elapsed_time:.2f}s")
 
-    return best_sol, best_cost
+    return best_sol, best_cost, best_hard, best_soft
 
 # --------------------------
 # 10) 打印课表
@@ -614,33 +616,43 @@ def print_schedule(sol, course_dict):
 # 主函数
 # --------------------------
 def main():
-    # 1) 解析CSV
-    cdict, lectid = parse_course_info(course_info_csv)
-    stu_list = parse_student_info(student_courses_csv)
-    c2s = build_course_to_students(stu_list)
+    # Redirect stdout to a file
+    original_stdout = sys.stdout
+    with open('sa_timetable_output.txt', 'w', encoding='utf-8') as f: # Specify UTF-8 encoding
+        sys.stdout = f
 
-    start_time = time.time()
+        # 1) 解析CSV
+        cdict, lectid = parse_course_info(course_info_csv)
+        stu_list = parse_student_info(student_courses_csv)
+        c2s = build_course_to_students(stu_list)
 
-    # 2) 并行Workshop拆分
-    new_cd, new_c2s = split_workshop_sessions(cdict, c2s, max_capacity=30)
+        start_time = time.time()
 
-    # 3) 使用模拟退火算法 (可自行调整参数)
-    best_sol, best_cost = simulated_annealing(new_cd, new_c2s,
-                                             max_iter=200000,
-                                             max_neighbors=30,
-                                             initial_temp=100.0,
-                                             cooling_rate=0.99,
-                                             seed=42)
+        # 2) 并行Workshop拆分
+        new_cd, new_c2s = split_workshop_sessions(cdict, c2s, max_capacity=30)
 
-    end_time = time.time()
-    total_time = end_time - start_time
+        # 3) 使用模拟退火算法 (可自行调整参数)
+        best_sol, best_cost, best_hard, best_soft = simulated_annealing(new_cd, new_c2s,
+                                                 max_iter=80000,  # 减少迭代次数，加快测试速度
+                                                 max_neighbors=30,
+                                                 initial_temp=100.0,
+                                                 cooling_rate=0.99,
+                                                 seed=42)
 
-    print("\n=== Done Simulated Annealing ===")
-    print("\nRunning time: {:.2f} seconds".format(total_time))
-    print("Best cost =", best_cost)
+        end_time = time.time()
+        total_time = end_time - start_time
 
-    # 4) 打印排课结果
-    print_schedule(best_sol, new_cd)
+        print("\n=== Done Simulated Annealing ===")
+        print("\nRunning time: {:.2f} seconds".format(total_time))
+        print(f"Best cost: {best_cost}, Hard Conflicts: {best_hard}, Soft Conflicts: {best_soft}")
+
+
+        # 4) 打印排课结果
+        print_schedule(best_sol, new_cd)
+
+    # Restore stdout
+    sys.stdout = original_stdout
+    print("Output saved to sa_timetable_output.txt")
 
 if __name__ == "__main__":
     main()
