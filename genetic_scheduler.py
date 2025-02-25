@@ -8,6 +8,10 @@ from collections import defaultdict
 from io import StringIO
 
 # --------------------------
+# ga_scheduler
+# --------------------------
+
+# --------------------------
 # 1) 教室名称映射
 # --------------------------
 classroom_mapping = {
