@@ -1,0 +1,14 @@
+Iter=0, currentCost=1251523, Hard Conflicts: 124, Soft Conflicts: 11647, Best Cost: 1251523, Time: 0.02s
+Iter=2, currentCost=1191600, Hard Conflicts: 118, Soft Conflicts: 11718, Best Cost: 1191600, Time: 0.09s
+Iter=3, currentCost=1071636, Hard Conflicts: 106, Soft Conflicts: 11742, Best Cost: 1071636, Time: 0.12s
+Iter=4, currentCost=1011558, Hard Conflicts: 100, Soft Conflicts: 11658, Best Cost: 1011558, Time: 0.14s
+Iter=5, currentCost=901415, Hard Conflicts: 89, Soft Conflicts: 11504, Best Cost: 901415, Time: 0.17s
+Iter=6, currentCost=841331, Hard Conflicts: 83, Soft Conflicts: 11414, Best Cost: 841331, Time: 0.20s
+Iter=10, currentCost=560528, Hard Conflicts: 55, Soft Conflicts: 10583, Best Cost: 560528, Time: 0.31s
+Iter=15, currentCost=339189, Hard Conflicts: 33, Soft Conflicts: 9222, Best Cost: 339189, Time: 0.46s
+Iter=17, currentCost=289179, Hard Conflicts: 28, Soft Conflicts: 9207, Best Cost: 289179, Time: 0.51s
+Iter=19, currentCost=128700, Hard Conflicts: 12, Soft Conflicts: 8712, Best Cost: 128700, Time: 0.56s
+Iter=23, currentCost=68449, Hard Conflicts: 6, Soft Conflicts: 8455, Best Cost: 68449, Time: 0.68s
+Iter=25, currentCost=8406, Hard Conflicts: 0, Soft Conflicts: 8406, Best Cost: 8406, Time: 0.73s
+Iter=3326, currentCost=52117, Hard Conflicts: 5, Soft Conflicts: 2122, Best Cost: 1997, Time: 84.78s
+Iter=3327, currentCost=2102, Hard Conflicts: 0, Soft Conflicts: 2102, Best Cost: 1997, Time: 84.81s

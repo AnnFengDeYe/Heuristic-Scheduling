@@ -1,0 +1,292 @@
+================= Final Timetable (Lecture) =================
+Course: Numerical Linear Algebra | Lecturer: Dr Jacques Vanneste
+  Classroom => Oak Lecture Theater - Nucleus (Every Week)
+    Monday, 12-13
+    Tuesday, 12-13
+-----
+Course: Python Programming | Lecturer: Dr Charlotte Desvages
+  Classroom => Elm Lecture Theater - Nucleus (Every Week)
+    Tuesday, 10-11
+-----
+Course: Research Skills for Computational Applied Mathematics | Lecturer: Prof Benedict Leimkuhler
+  Classroom => Oak Lecture Theater - Nucleus (Every Week)
+    Thursday, 12-13
+-----
+Course: Applied Stochastic Differential Equations | Lecturer: Dr Kostas Zygalakis
+  Classroom => Yew Lecture Theater - Nucleus (Every Week)
+    Wednesday, 12-13
+    Monday, 10-11
+-----
+Course: Statistical Methodology | Lecturer: Dr Victor Elvira Arregui
+  Classroom => Oak Lecture Theater - Nucleus (Every Week)
+    Thursday, 11-12
+    Tuesday, 10-11
+-----
+Course: Stochastic Modelling | Lecturer: Dr Theo Assiotis
+  Classroom => Lecture Theatre 1 - Ashworth Labs (Every Week)
+    Monday, 11-12
+    Thursday, 10-11
+-----
+Course: Fundamentals of Optimization | Lecturer: Prof Alper Yildirim
+  Classroom => Lecture Theater B - JCMB (Every Week)
+    Friday, 10-11 & 11-12
+-----
+Course: Statistical Programming | Lecturer: Prof Simon Wood
+  Classroom => Yew Lecture Theater - Nucleus (Every Week)
+    Thursday, 10-11
+    Thursday, 11-12
+-----
+Course: Bayesian Theory | Lecturer: Prof Finn Lindgren
+  Classroom => Lecture Theater B - JCMB (Every Week)
+    Monday, 11-12 & 12-13
+-----
+Course: Introductory Probability and Statistics | Lecturer: Dr Skarleth Carrales Escobedo
+  Classroom => Swann Lecture Theater (Every Week)
+    Thursday, 11-12
+    Friday, 12-13
+-----
+Course: Industrial Mathematics | Lecturer: Dr Benjamin Goddard
+  Classroom => Oak Lecture Theater - Nucleus (Every Week)
+    Friday, 12-13
+-----
+Course: Stochastic Analysis in Finance | Lecturer: Prof Istvan Gyongy
+  Classroom => Alder Lecture Theater - Nucleus (Every Week)
+    Tuesday, 11-12 & 12-13
+    Wednesday, 10-11 & 11-12
+-----
+Course: Discrete-Time Finance | Lecturer: Dr Tibor Antal
+  Classroom => Lecture Theatre 1 - Ashworth Labs (Every Week)
+    Thursday, 12-13
+-----
+Course: Finance, Risk and Uncertainty | Lecturer: Dr Jiawei Li
+  Classroom => Elm Lecture Theater - Nucleus (Every Week)
+    Monday, 12-13
+    Friday, 12-13
+-----
+Course: Fundamentals of Operational Research | Lecturer: Dr Sergio Garcia Quiles
+  Classroom => Lecture Theatre 1 - Ashworth Labs (Every Week)
+    Wednesday, 12-13
+    Monday, 10-11
+-----
+Course: Methodology, Modelling and Consulting Skills | Lecturer: Dr Kit Searle
+  Classroom => Lecture Theater A - JCMB (Every Week)
+    Thursday, 12-13
+    Friday, 12-13
+-----
+Course: Generalised Regression Models | Lecturer: Prof Patrick Rubin-Delanchy
+  Classroom => Lecture Theatre 1 - Ashworth Labs (Every Week)
+    Wednesday, 10-11 & 11-12
+-----
+Course: Extended Statistical Programming | Lecturer: Prof Simon Wood
+  Classroom => Lecture Theater C - JCMB (Every Week)
+    Friday, 12-13
+    Tuesday, 11-12
+-----
+
+================= Final Timetable (Workshop) =================
+Course: Research Skills for Computational Applied Mathematics | Instructor: Prof Benedict Leimkuhler
+  Workshop Room => ws16 (Single Week Only)
+    Friday, 13-14
+-----
+Course: Applied Stochastic Differential Equations | Instructor: Dr Kostas Zygalakis
+  Workshop Room => ws20 (Single Week Only)
+    Wednesday, 12-13
+    Wednesday, 13-14
+-----
+Course: Introductory Probability and Statistics | Instructor: Dr Skarleth Carrales Escobedo
+  Workshop Room => ws19 (Every Week)
+    Monday, 13-14
+-----
+Course: Industrial Mathematics | Instructor: Dr Benjamin Goddard
+  Workshop Room => ws4 (Every Week)
+    Friday, 12-13
+    Monday, 12-13
+-----
+Course: Finance, Risk and Uncertainty | Instructor: Dr Jiawei Li
+  Workshop Room => ws18 (Every Week)
+    Monday, 12-13
+-----
+Course: Numerical Linear Algebra_WS0 | Instructor: Dr Jacques Vanneste
+  Workshop Room => ws19 (Every Week)
+    Tuesday, 10-11
+-----
+Course: Numerical Linear Algebra_WS1 | Instructor: Dr Jacques Vanneste
+  Workshop Room => ws10 (Every Week)
+    Thursday, 13-14
+-----
+Course: Python Programming_WS0 | Instructor: Dr Charlotte Desvages
+  Workshop Room => ws4 (Every Week)
+    Tuesday, 12-13 & 13-14
+    Wednesday, 9-10 & 10-11
+-----
+Course: Python Programming_WS1 | Instructor: Dr Charlotte Desvages
+  Workshop Room => ws2 (Every Week)
+    Thursday, 9-10 & 10-11
+    Thursday, 12-13 & 13-14
+-----
+Course: Python Programming_WS2 | Instructor: Dr Charlotte Desvages
+  Workshop Room => ws12 (Every Week)
+    Friday, 12-13 & 13-14
+    Wednesday, 12-13 & 13-14
+-----
+Course: Python Programming_WS3 | Instructor: Dr Charlotte Desvages
+  Workshop Room => ws14 (Every Week)
+    Monday, 12-13 & 13-14
+    Friday, 9-10 & 10-11
+-----
+Course: Statistical Methodology_WS0 | Instructor: Dr Victor Elvira Arregui
+  Workshop Room => ws9 (Double Week Only)
+    Wednesday, 13-14
+-----
+Course: Statistical Methodology_WS1 | Instructor: Dr Victor Elvira Arregui
+  Workshop Room => ws16 (Double Week Only)
+    Tuesday, 11-12
+-----
+Course: Statistical Methodology_WS2 | Instructor: Dr Victor Elvira Arregui
+  Workshop Room => ws14 (Double Week Only)
+    Friday, 12-13
+-----
+Course: Stochastic Modelling_WS0 | Instructor: Dr Theo Assiotis
+  Workshop Room => ws11 (Single Week Only)
+    Wednesday, 12-13 & 13-14
+-----
+Course: Stochastic Modelling_WS1 | Instructor: Dr Theo Assiotis
+  Workshop Room => ws7 (Single Week Only)
+    Thursday, 12-13 & 13-14
+-----
+Course: Stochastic Modelling_WS2 | Instructor: Dr Theo Assiotis
+  Workshop Room => ws7 (Single Week Only)
+    Friday, 12-13 & 13-14
+-----
+Course: Stochastic Modelling_WS3 | Instructor: Dr Theo Assiotis
+  Workshop Room => ws2 (Single Week Only)
+    Tuesday, 11-12 & 12-13
+-----
+Course: Fundamentals of Optimization_WS0 | Instructor: Prof Alper Yildirim
+  Workshop Room => ws5 (Single Week Only)
+    Friday, 12-13 & 13-14
+-----
+Course: Fundamentals of Optimization_WS1 | Instructor: Prof Alper Yildirim
+  Workshop Room => ws8 (Single Week Only)
+    Thursday, 12-13 & 13-14
+-----
+Course: Fundamentals of Optimization_WS2 | Instructor: Prof Alper Yildirim
+  Workshop Room => ws1 (Single Week Only)
+    Tuesday, 12-13 & 13-14
+-----
+Course: Fundamentals of Optimization_WS3 | Instructor: Prof Alper Yildirim
+  Workshop Room => ws6 (Single Week Only)
+    Wednesday, 12-13 & 13-14
+-----
+Course: Fundamentals of Optimization_WS4 | Instructor: Prof Alper Yildirim
+  Workshop Room => ws11 (Single Week Only)
+    Monday, 12-13 & 13-14
+-----
+Course: Statistical Programming_WS0 | Instructor: Prof Simon Wood
+  Workshop Room => ws17 (Every Week)
+    Monday, 13-14
+-----
+Course: Statistical Programming_WS1 | Instructor: Prof Simon Wood
+  Workshop Room => ws16 (Every Week)
+    Tuesday, 12-13
+-----
+Course: Bayesian Theory_WS0 | Instructor: Prof Finn Lindgren
+  Workshop Room => ws9 (Single Week Only)
+    Friday, 12-13
+-----
+Course: Bayesian Theory_WS1 | Instructor: Prof Finn Lindgren
+  Workshop Room => ws13 (Single Week Only)
+    Thursday, 13-14
+-----
+Course: Bayesian Theory_WS2 | Instructor: Prof Finn Lindgren
+  Workshop Room => ws9 (Single Week Only)
+    Tuesday, 12-13
+-----
+Course: Bayesian Theory_WS3 | Instructor: Prof Finn Lindgren
+  Workshop Room => ws20 (Single Week Only)
+    Thursday, 11-12
+-----
+Course: Bayesian Theory_WS4 | Instructor: Prof Finn Lindgren
+  Workshop Room => ws16 (Single Week Only)
+    Thursday, 12-13
+-----
+Course: Stochastic Analysis in Finance_WS0 | Instructor: Prof Istvan Gyongy
+  Workshop Room => ws19 (Every Week)
+    Friday, 13-14
+-----
+Course: Stochastic Analysis in Finance_WS1 | Instructor: Prof Istvan Gyongy
+  Workshop Room => ws7 (Every Week)
+    Monday, 13-14
+-----
+Course: Discrete-Time Finance_WS0 | Instructor: Dr Tibor Antal
+  Workshop Room => ws10 (Double Week Only)
+    Friday, 12-13
+-----
+Course: Discrete-Time Finance_WS1 | Instructor: Dr Tibor Antal
+  Workshop Room => ws12 (Double Week Only)
+    Tuesday, 12-13
+-----
+Course: Fundamentals of Operational Research_WS0 | Instructor: Dr Sergio Garcia Quiles
+  Workshop Room => ws14 (Double Week Only)
+    Monday, 11-12
+-----
+Course: Fundamentals of Operational Research_WS1 | Instructor: Dr Sergio Garcia Quiles
+  Workshop Room => ws16 (Double Week Only)
+    Thursday, 12-13
+-----
+Course: Fundamentals of Operational Research_WS2 | Instructor: Dr Sergio Garcia Quiles
+  Workshop Room => ws7 (Double Week Only)
+    Tuesday, 13-14
+-----
+Course: Fundamentals of Operational Research_WS3 | Instructor: Dr Sergio Garcia Quiles
+  Workshop Room => ws20 (Double Week Only)
+    Monday, 12-13
+-----
+Course: Fundamentals of Operational Research_WS4 | Instructor: Dr Sergio Garcia Quiles
+  Workshop Room => ws5 (Double Week Only)
+    Thursday, 13-14
+-----
+Course: Methodology, Modelling and Consulting Skills_WS0 | Instructor: Dr Kit Searle
+  Workshop Room => ws3 (Every Week)
+    Thursday, 13-14
+-----
+Course: Methodology, Modelling and Consulting Skills_WS1 | Instructor: Dr Kit Searle
+  Workshop Room => ws2 (Every Week)
+    Monday, 12-13
+-----
+Course: Methodology, Modelling and Consulting Skills_WS2 | Instructor: Dr Kit Searle
+  Workshop Room => ws1 (Every Week)
+    Thursday, 12-13
+-----
+Course: Generalised Regression Models_WS0 | Instructor: Prof Patrick Rubin-Delanchy
+  Workshop Room => ws16 (Single Week Only)
+    Tuesday, 10-11
+-----
+Course: Generalised Regression Models_WS1 | Instructor: Prof Patrick Rubin-Delanchy
+  Workshop Room => ws6 (Single Week Only)
+    Tuesday, 11-12
+-----
+Course: Generalised Regression Models_WS2 | Instructor: Prof Patrick Rubin-Delanchy
+  Workshop Room => ws5 (Single Week Only)
+    Thursday, 13-14
+-----
+Course: Generalised Regression Models_WS3 | Instructor: Prof Patrick Rubin-Delanchy
+  Workshop Room => ws9 (Single Week Only)
+    Wednesday, 12-13
+-----
+Course: Generalised Regression Models_WS4 | Instructor: Prof Patrick Rubin-Delanchy
+  Workshop Room => ws8 (Single Week Only)
+    Thursday, 11-12
+-----
+Course: Extended Statistical Programming_WS0 | Instructor: Prof Simon Wood
+  Workshop Room => ws6 (Every Week)
+    Thursday, 11-12
+-----
+Course: Extended Statistical Programming_WS1 | Instructor: Prof Simon Wood
+  Workshop Room => ws14 (Every Week)
+    Thursday, 12-13
+-----
+Course: Extended Statistical Programming_WS2 | Instructor: Prof Simon Wood
+  Workshop Room => ws5 (Every Week)
+    Tuesday, 13-14
+-----

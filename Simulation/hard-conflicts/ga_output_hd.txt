@@ -1,0 +1,12 @@
+Iter 1, Best Cost: 1547360, Hard Conflicts: 153, Soft Conflicts: 17513, Time: 0.16s
+Iter 2, Best Cost: 1011361, Hard Conflicts: 100, Soft Conflicts: 11461, Time: 0.31s
+Iter 4, Best Cost: 893021, Hard Conflicts: 88, Soft Conflicts: 13109, Time: 0.60s
+Iter 5, Best Cost: 841300, Hard Conflicts: 83, Soft Conflicts: 11383, Time: 0.72s
+Iter 6, Best Cost: 743358, Hard Conflicts: 73, Soft Conflicts: 13431, Time: 0.86s
+Iter 7, Best Cost: 572319, Hard Conflicts: 56, Soft Conflicts: 12375, Time: 1.00s
+Iter 8, Best Cost: 452598, Hard Conflicts: 44, Soft Conflicts: 12642, Time: 1.14s
+Iter 9, Best Cost: 352421, Hard Conflicts: 34, Soft Conflicts: 12455, Time: 1.26s
+Iter 10, Best Cost: 291251, Hard Conflicts: 28, Soft Conflicts: 11279, Time: 1.40s
+Iter 11, Best Cost: 179869, Hard Conflicts: 17, Soft Conflicts: 9886, Time: 1.53s
+Iter 16, Best Cost: 119351, Hard Conflicts: 11, Soft Conflicts: 9362, Time: 2.15s
+Iter 29, Best Cost: 8981, Hard Conflicts: 0, Soft Conflicts: 8981, Time: 3.79s
