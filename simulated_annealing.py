@@ -12,11 +12,6 @@ from io import StringIO
 import sys
 
 # --------------------------
-# sa_scheduler
-# --------------------------
-
-
-# --------------------------
 # 1) 教室名称映射
 # --------------------------
 classroom_mapping = {
@@ -638,8 +633,8 @@ def main():
 
         # 3) 使用模拟退火算法 (可自行调整参数)
         best_sol, best_cost, best_hard, best_soft = simulated_annealing(new_cd, new_c2s,
-                                                 max_iter=80000,  # 减少迭代次数，加快测试速度
-                                                 max_neighbors=30,
+                                                 max_iter=50000,  # 减少迭代次数，加快测试速度
+                                                 max_neighbors=100,
                                                  initial_temp=100.0,
                                                  cooling_rate=0.99,
                                                  seed=42)

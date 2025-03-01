@@ -8,10 +8,6 @@ from collections import defaultdict
 from io import StringIO
 
 # --------------------------
-# ga_scheduler
-# --------------------------
-
-# --------------------------
 # 1) 教室名称映射
 # --------------------------
 classroom_mapping = {
@@ -370,6 +366,19 @@ def evaluate_solution(sol, course_dict, course2stu):
                 for j in range(i + 1, n):
                     soft_conflicts += len(cSets[i].intersection(cSets[j]))
 
+    # -------------- 新增硬性约束 --------------
+    # (5) 禁止“一周多次课(>1)且每次1小时”的课程在同一天上两次
+    for c in sol['lecture']:
+        if c not in course_dict:
+            continue
+        lec_times, lec_hrs, _ = course_dict[c]['lecture_freq']
+        # 如果该课程是一周多次(>1)且每次1小时
+        if lec_times > 1 and lec_hrs == 1:
+            days_used = [day for (day, slot_tuple) in sol['lecture'][c]['slots']]
+            if len(set(days_used)) < len(days_used):
+                # 说明有重复day => 判为硬冲突
+                hard_conflicts += 1
+
     return HARD_CONFLICT_PENALTY * hard_conflicts + soft_conflicts, hard_conflicts, soft_conflicts
 
 
@@ -508,7 +517,7 @@ class GeneticScheduler:
 
             population = new_pop
             elapsed_time = time.time() - self.start_time
-            print(f"Generation {generation + 1}, Best Cost: {current_fitness}, Hard Conflicts: {current_hard_conflicts}, Soft Conflicts: {current_soft_conflicts}, Time: {elapsed_time:.2f}s")
+            print(f"Iter {generation + 1}, Best Cost: {current_fitness}, Hard Conflicts: {current_hard_conflicts}, Soft Conflicts: {current_soft_conflicts}, Time: {elapsed_time:.2f}s")
 
 
         return best_solution, best_fitness, best_hard_conflicts, best_soft_conflicts
